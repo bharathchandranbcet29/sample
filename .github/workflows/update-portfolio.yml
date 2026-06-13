@@ -1,0 +1,20 @@
+name: Update Portfolio
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger-updatebot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger UpdateBot
+        run: |
+          curl -L \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+          https://api.github.com/repos/bharathchandranbcet29/updatebot/actions/workflows/update.yml/dispatches \
+          -d '{"ref":"main"}'
